@@ -1,0 +1,9 @@
+<h1 class="text-center mt-3">Hangman Game</h1>
+
+<div class="container">
+    <div class="color text-center title"><span>Guess the current animal</span></div>
+
+    <div class="letter-container mt-4 d-flex justify-content-around">
+        <button *ngFor="let letter of letters" class="btn button" (click)="isMatching(letter)">{{letter}}</button>
+    </div>
+</div>

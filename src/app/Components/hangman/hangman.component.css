@@ -1,0 +1,24 @@
+.letter-container {
+    margin-left: auto;
+    margin-right: auto;
+    flex-wrap: wrap;
+}
+
+.button {
+    background-color: rgb(15, 146, 15);
+    border: 2px solid rgb(255, 255, 255);
+    color: white;
+}
+
+h1 {
+    color: springgreen;
+}
+
+.color {
+    color: white;
+}
+
+.title {
+    font-size: 1.5rem;
+    margin-top: 2em;
+}
