@@ -9,14 +9,11 @@ export class HangmanComponent implements OnInit {
   letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
   animals = ["pig", "dog", "monkey", "tiger", "zebra", "cat", "eagle", "bird", "snake", "turtle"];
   targetAnimal: Array<string> = new Array();
-  targetLetter: string = "";
 
   buttons = Array(26).fill(false);
-
-  
-
-  isMatching = false;
   newAnimal: string[] = [];
+
+  counter: number = 5;
   constructor() {
 
   }
@@ -28,13 +25,26 @@ export class HangmanComponent implements OnInit {
   }
 
   guessLetter(letter: string) {
+    let found=false;
     for (let i=0; i<this.targetAnimal.length; i++) {
       if (letter.toLowerCase() == this.targetAnimal[i]) {
         this.newAnimal[i] = this.targetAnimal[i];
+        found=true;
+      }
+    
+    }
+    if(!found) {
+      if (this.counter == 0)
+      {
+        alert("U LOST");
+        this.counter = 0
+      }
+      else
+      {
+        --this.counter;
       }
     }
-
-    console.log(this.newAnimal)
+    
   }
 
   generateAnimal() {
