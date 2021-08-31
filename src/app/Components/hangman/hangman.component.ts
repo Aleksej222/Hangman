@@ -8,41 +8,33 @@ import { Component, OnInit } from '@angular/core';
 export class HangmanComponent implements OnInit {
   letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
   animals = ["pig", "dog", "monkey", "tiger", "zebra", "cat", "eagle", "bird", "snake", "turtle"];
-  targetAnimal: string = "";
+  targetAnimal: Array<string> = new Array();
   targetLetter: string = "";
 
   buttons = Array(26).fill(false);
-  guess: string = "";
-  newGuess: any = [];
-  newAnimal: any = [];
+
+  
 
   isMatching = false;
+  newAnimal: string[] = [];
   constructor() {
 
   }
 
   ngOnInit(): void {
-    this.targetAnimal = this.generateAnimal()
+    this.targetAnimal = this.generateAnimal().split('');
+    this.newAnimal = new Array(this.targetAnimal.length);
     console.log(this.targetAnimal);
   }
 
   guessLetter(letter: string) {
-    this.newAnimal = this.targetAnimal.split('');
-    console.log(this.newAnimal);
-
-    for (let i = 0; i < this.newAnimal.length; i++) {
-      if (letter.toLowerCase() == this.newAnimal[i]) {
-        this.guess += letter.toLowerCase();
-        this.isMatching = true;
+    for (let i=0; i<this.targetAnimal.length; i++) {
+      if (letter.toLowerCase() == this.targetAnimal[i]) {
+        this.newAnimal[i] = this.targetAnimal[i];
       }
     }
 
-    this.newGuess = this.guess.split('');
-    this.newGuess = this.newGuess.sort((a: any, b: any) => {
-      return this.newAnimal.indexOf(a) - this.newAnimal.indexOf(b);
-    });
-    console.log(this.newGuess);
-
+    console.log(this.newAnimal)
   }
 
   generateAnimal() {
