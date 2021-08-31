@@ -4,6 +4,24 @@
     <div class="color text-center title"><span>Guess the current animal</span></div>
 
     <div class="letter-container mt-4 d-flex justify-content-around">
-        <button *ngFor="let letter of letters" class="btn button" (click)="isMatching(letter)">{{letter}}</button>
+        <button *ngFor="let letter of letters; index as i" class="btn button" (click)="guessLetter(letter)"
+            [disabled]="buttons[i]" (click)="buttons[i]=true">{{letter}}</button>
+    </div>
+
+    <div class="guessed-letters-container">
+        <div *ngFor="let letter of newGuess" class="letter">
+            {{letter}}
+        </div>
     </div>
 </div>
+
+<!-- 
+     <div class="letter-container mt-4 d-flex justify-content-around">
+        <div *ngFor="let targetAnimalLetter of targetAnimal">
+            <div [ngClass]="[targetAnimalLetter.isGuessed?'':'opacity-none', 'letter']">
+                {{targetAnimalLetter.text}}
+            </div>
+    
+        </div>
+    </div>
+ -->

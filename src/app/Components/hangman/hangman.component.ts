@@ -6,41 +6,49 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./hangman.component.css']
 })
 export class HangmanComponent implements OnInit {
-  letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+  letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
   animals = ["pig", "dog", "monkey", "tiger", "zebra", "cat", "eagle", "bird", "snake", "turtle"];
-  targetAnimal:string="";
-  targetLetter:string = "";
+  targetAnimal: string = "";
+  targetLetter: string = "";
 
+  buttons = Array(26).fill(false);
+  guess: string = "";
+  newGuess: any = [];
+  newAnimal: any = [];
+
+  isMatching = false;
   constructor() {
 
   }
 
   ngOnInit(): void {
-    this.targetAnimal=this.generateAnimal()
+    this.targetAnimal = this.generateAnimal()
+    console.log(this.targetAnimal);
   }
 
-  guessLetter(letter: string): string {
-    // console.log(letter)
-    return this.targetLetter = letter;
+  guessLetter(letter: string) {
+    this.newAnimal = this.targetAnimal.split('');
+    console.log(this.newAnimal);
+
+    for (let i = 0; i < this.newAnimal.length; i++) {
+      if (letter.toLowerCase() == this.newAnimal[i]) {
+        this.guess += letter.toLowerCase();
+        this.isMatching = true;
+      }
+    }
+
+    this.newGuess = this.guess.split('');
+    this.newGuess = this.newGuess.sort((a: any, b: any) => {
+      return this.newAnimal.indexOf(a) - this.newAnimal.indexOf(b);
+    });
+    console.log(this.newGuess);
+
   }
 
   generateAnimal() {
-    
-  let randomNumber = Math.floor((Math.random() * 10) + 1);
-  let currentAnimal = this.animals[randomNumber];
-
-  console.log(currentAnimal);
-  return currentAnimal;
+    let currentAnimal = this.animals[Math.floor(Math.random() * this.animals.length)];
+    return currentAnimal;
   }
-  
-  isMatching(letter: string) {
-    let newAnimal = [];
-    let animalLength = this.targetAnimal.length
-   
 
-    for(let i=0; i<animalLength; i++) {
-      this.targetLetter = this.guessLetter(letter);
-      console.log(letter);
-    }
-  }
+
 }

@@ -2,6 +2,8 @@
     margin-left: auto;
     margin-right: auto;
     flex-wrap: wrap;
+    flex-direction: row;
+    
 }
 
 .button {
@@ -21,4 +23,48 @@ h1 {
 .title {
     font-size: 1.5rem;
     margin-top: 2em;
+}
+/* .opacity-none{
+    opacity: 0;
+
+}
+.letter{
+    padding: 20px;
+    margin: 20px;
+    background: darkgreen;
+    color: white;
+    font-weight: bold;
+    border: 1px solid white;
+    border-radius: 40%;
+} */
+
+.guessed-letters-container {
+    /* visibility: hidden; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap:wrap;
+}
+
+.letters {
+    color: springgreen;
+    margin-top: 1em;
+}
+
+.opacity-none{
+    opacity: 0;
+}
+.guessed-letters-container{
+    display: flex;
+    flex-direction: row;
+}
+.letter{
+    padding:20px;
+    border:1px solid white;
+    color: white;
+    background: darkgreen;
+    font-weight: bold;
+    margin: 20px;
+    border-radius: 20%;
 }
