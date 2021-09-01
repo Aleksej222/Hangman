@@ -31,18 +31,23 @@ export class HangmanComponent implements OnInit {
         this.newAnimal[i] = this.targetAnimal[i];
         found=true;
       }
-    
     }
     if(!found) {
-      if (this.counter == 0)
+      if (this.counter <= 1)
       {
         alert("U LOST");
         this.counter = 0
+        this.buttons = Array(26).fill(true)
       }
       else
       {
         --this.counter;
       }
+    }
+
+    if(this.arraysAreEqual(this.targetAnimal, this.newAnimal)){
+      alert("You won");
+      this.buttons = Array(26).fill(true)
     }
     
   }
@@ -52,5 +57,12 @@ export class HangmanComponent implements OnInit {
     return currentAnimal;
   }
 
+  arraysAreEqual (a: Array<string>,b: Array<string>) {
+    if (a === b) return true;
+    for (let i=0; i<a.length; i++) {
+      if (a[i] !== b[i]) return false;
+    }
+    return true;
+  }
 
 }
