@@ -24,22 +24,8 @@ h1 {
     font-size: 1.5rem;
     margin-top: 2em;
 }
-/* .opacity-none{
-    opacity: 0;
-
-}
-.letter{
-    padding: 20px;
-    margin: 20px;
-    background: darkgreen;
-    color: white;
-    font-weight: bold;
-    border: 1px solid white;
-    border-radius: 40%;
-} */
 
 .guessed-letters-container {
-    /* visibility: hidden; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -53,7 +39,7 @@ h1 {
 }
 
 .opacity-none{
-    opacity: 0;
+    opacity: 0!important;
 }
 .guessed-letters-container{
     display: flex;

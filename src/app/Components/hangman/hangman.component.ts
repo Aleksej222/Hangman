@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,28 +8,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HangmanComponent implements OnInit {
   letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-  animals = ["pig", "dog", "monkey", "tiger", "zebra", "cat", "eagle", "bird", "snake", "turtle"];
-  targetAnimal: Array<string> = new Array();
+  targetWord: Array<string> = new Array();
 
   buttons = Array(26).fill(false);
-  newAnimal: string[] = [];
+  newWord: string[] = [];
 
   counter: number = 5;
+  word: any;
+
+  categories = [
+    {name:'animal', values:["pig", "dog", "monkey", "tiger", "zebra", "cat", "eagle", "bird", "snake", "turtle"]},
+    {name:'city',values:["tokyo", "berlin", "london", "paris", "chicago", "new york", "melbourne"]},
+    {name:'color',values:["blue", "orange", "black", "white", "purple", "green", "yellow"]}
+  ]
   constructor() {
 
   }
 
   ngOnInit(): void {
-    this.targetAnimal = this.generateAnimal().split('');
-    this.newAnimal = new Array(this.targetAnimal.length);
-    console.log(this.targetAnimal);
+    this.targetWord = this.generateRandomWord().split('');
+    this.newWord = new Array(this.targetWord.length);
+
+    for(let i=0;i<this.targetWord.length;++i){
+      if(this.targetWord[i]==' '){
+        this.newWord[i]=' ';
+      }
+    }
+    console.log(this.targetWord);
   }
 
   guessLetter(letter: string) {
     let found=false;
-    for (let i=0; i<this.targetAnimal.length; i++) {
-      if (letter.toLowerCase() == this.targetAnimal[i]) {
-        this.newAnimal[i] = this.targetAnimal[i];
+    for (let i=0; i<this.targetWord.length; i++) {
+      if (letter.toLowerCase() == this.targetWord[i] ) {
+        this.newWord[i] = this.targetWord[i];
         found=true;
       }
     }
@@ -45,16 +58,20 @@ export class HangmanComponent implements OnInit {
       }
     }
 
-    if(this.arraysAreEqual(this.targetAnimal, this.newAnimal)){
+    if(this.arraysAreEqual(this.targetWord, this.newWord)){
       alert("You won");
       this.buttons = Array(26).fill(true)
     }
     
   }
 
-  generateAnimal() {
-    let currentAnimal = this.animals[Math.floor(Math.random() * this.animals.length)];
-    return currentAnimal;
+  generateRandomWord() {
+    let rndCategorie = Math.floor(Math.random()* this.categories.length);
+    let rndVal = Math.floor(Math.random()* this.categories[rndCategorie].values.length);
+    let currentWord = this.categories[rndCategorie].values[rndVal];
+  
+    this.word = this.categories[rndCategorie];
+    return currentWord;
   }
 
   arraysAreEqual (a: Array<string>,b: Array<string>) {
